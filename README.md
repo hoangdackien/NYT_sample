@@ -15,3 +15,6 @@
             ✓ validates quantity of news per one page (= 10 articles)
             ✓ validate GGFont API
             ✓ validate components
+# Config NYT API Key
+    js/constants/NYTConstants.js
+        NYT_API_KEY: 8488ed23361b4bb382bcb5caf02b3fbf

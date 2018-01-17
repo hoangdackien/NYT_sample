@@ -7,7 +7,8 @@ var NYTHome = createReactClass({
     getInitialState: function() {
         return {
             isDetailOpen: false,
-            children_node: null
+            children_node: null,
+            pageIndex: 0
          };
     },
     renderSingleItem : function(index, fsize = "", first_a_c = ""){
@@ -18,19 +19,22 @@ var NYTHome = createReactClass({
                     parentToggle={this.toggleModal}/>
     },
     prevPage: function() {
-        var prevPageIndex = parseInt(this.props.pageIndex) - 1;
+        var prevPageIndex = parseInt(this.state.pageIndex - 1);
         NYTActions.requestNewsWithPageIndex(prevPageIndex);
-    },
-    nextPage: function() {
-        var nextPageIndex = parseInt(this.props.pageIndex) + 1;
-        NYTActions.requestNewsWithPageIndex(nextPageIndex);
-    },
-    componentDidUpdate(prevProps, prevState) {
-        var pIndex = this.props.pageIndex;
-        if(pIndex <= 0)
+        if(prevPageIndex <= 0)
             document.getElementById("btnPrev").className = "disabled";
         else
             document.getElementById("btnPrev").className = "";
+        this.state.pageIndex = prevPageIndex;
+    },
+    nextPage: function() {
+        var nextPageIndex = parseInt(this.state.pageIndex) + 1;
+        NYTActions.requestNewsWithPageIndex(nextPageIndex);
+        if(nextPageIndex <= 0)
+            document.getElementById("btnPrev").className = "disabled";
+        else
+            document.getElementById("btnPrev").className = "";
+        this.state.pageIndex = nextPageIndex;
     },
     toggleModal: function(that) {
         document.body.className = "";
@@ -43,7 +47,7 @@ var NYTHome = createReactClass({
         NYTActions.requestNewsWithPageIndex(0);
     },
     render: function () {
-      var self = this, news = this.props.news, pageIndex = 0;
+      var self = this;
       return (
         <div>
             <main className="main columns">
@@ -72,7 +76,7 @@ var NYTHome = createReactClass({
             <section className="section_pagination">
                 <div className="pagination clearfix">
                     <a id="btnPrev" href="javascript:void(0);" className="disabled" onClick={() => self.prevPage()}>Prev</a>
-                    <a href="javascript:void(0);" className="pageValue">{this.props.pageIndex+1}</a>
+                    <a href="javascript:void(0);" className="pageValue">{this.state.pageIndex+1}</a>
                     <a id="btnNext" href="javascript:void(0);" onClick={() => self.nextPage()}>Next</a>
                 </div>
             </section>

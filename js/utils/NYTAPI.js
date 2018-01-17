@@ -19,13 +19,12 @@ module.exports = {
                     return  b.multimedia.length - a.multimedia.length;
                 });
                 NYTActions.receiveNews(jsonData);
-                NYTActions.updatePageIndex(pageIndex);
                 setTimeout(() => {
                     this.preload_img_next_page(pageIndex+1);    
                 }, delay_load_time);
             });
         }).on("error", (err) => {
-          console.log("Error: " + err.message);
+            console.log("Error: " + err.message);
         });
     },
     preload_img_next_page:function(pageIndex){

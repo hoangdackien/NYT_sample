@@ -5,12 +5,9 @@ var NYTAPI = require('../utils/NYTAPI');
 
 var _ = require('underscore');
 
-var _news = {}, _pageIndex = 0;
+var _news = {};
 function loadNewsData(data) {
     _news = data;
-}
-function loadPageIndex(data) {
-    _pageIndex = data;
 }
 function getNewsWithPageIndex(pageIndex){
     NYTAPI.getNewsData(pageIndex);
@@ -18,9 +15,6 @@ function getNewsWithPageIndex(pageIndex){
 var NYTStore = _.extend({}, EventEmitter.prototype, {
     getNews: function () {
         return _news;
-    },
-    getPageIndex: function () {
-        return _pageIndex;
     },
     emitChange: function () {
         this.emit('change');
@@ -41,9 +35,6 @@ AppDispatcher.register(function (payload) {
             break;
         case NYTConstants.NYT_REQUEST_WITH_PAGE_INDEX:
             getNewsWithPageIndex(action.data);
-            break;
-        case NYTConstants.NYT_UPDATE_PAGEINDEX:
-            loadPageIndex(action.data);
             break;
         default:
             return true;

@@ -12,12 +12,6 @@ var NYTActions = {
         actionType: NYTConstants.NYT_REQUEST_WITH_PAGE_INDEX,
         data: pageIndex
       })
-    },
-    updatePageIndex: function (pageIndex) {
-      AppDispatcher.handleAction({
-        actionType: NYTConstants.NYT_UPDATE_PAGEINDEX,
-        data: pageIndex
-      })
     }
   };
   

@@ -5,8 +5,7 @@ var createReactClass = require('create-react-class');
 
 function getNewsState() {
     return {
-        news: NYTStore.getNews(),
-        pageIndex: NYTStore.getPageIndex()
+        news: NYTStore.getNews()
     };
 }
 var NYTApp = createReactClass({
@@ -22,7 +21,7 @@ var NYTApp = createReactClass({
     render: function() {
         return ( 
             <div>
-                <NYTHome news = { this.state.news } pageIndex={this.state.pageIndex}/> 
+                <NYTHome news = { this.state.news }/> 
             </div>
         );
     },

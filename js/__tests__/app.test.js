@@ -60,7 +60,7 @@ it('validate GGFont API ', async () => {
 it('validate components', () => {
     const nyt_app = Enzyme.shallow(<NYTApp />);
     const nyt_home = Enzyme.shallow(
-        <NYTHome news={jsonData.response.docs} pageIndex={0} />
+        <NYTHome news={jsonData.response.docs}/>
     );
     const mockFn = jest.fn();
     const nyt_detail_modal = Enzyme.shallow(<NYTDetailModal onClose={mockFn}/>);
